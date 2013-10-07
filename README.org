@@ -1,0 +1,18 @@
+* 2D Finite Volume Method for Transport of Thermal Energy in Cavity Flow
+** Intro
+In this project the transport equation for a scalar quantity in a fluid flow is solved on a uniform grid.
+In the problem cases this scalar quantity is the dimensionless temperature. Therefore the problem only depends upon the Peclét number, Pe which is a ratio betweem convection and diffusion.
+The fluxes used in the finite volume scheme are approximated by finite differences: 
+For the diffusion part of the equation, the central difference scheme, CDS are always applied since diffusion acts in all directions independent of the flow.   
+For the convective part, either CDS or upwind difference scheme, UDS is applied. UDS only used infomation from the upstream direction.
+CDS is second order, whereas UDS only is first-order.
+Combining CDS-CDS results in oscillations and divergence on coarser grids (Pe*dx>2), but gives a more accurate solution than CDS-UDS. The CDS-UDS scheme always result in a diagonal-dominant system matrix, which should be the case the numerical method should mimic the physics.
+CDS-UDS should not be used since it lowers the order of this FVM, which is second-order.
+** Functions
+***FVConvDiff2D.preprocess.py
+***FVConvDiff2D.postprocess.py
+** Drivers
+***UniformFlow.py
+***StagnationPointFlow.py
+***ConvergenceTo1dUniformFlowSolution.py
+***OptimalSOR.py
