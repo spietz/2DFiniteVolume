@@ -59,10 +59,10 @@ for i in range(0, len(N)):
         xc = np.arange(dx/2., L, dx)  # cell center coordinates along x-axis
         Xc, _ = np.meshgrid(xc, xc)  # 2D cell center x-coordinate array
 
-        T = spsolve(A, s.reshape(1, n**2, order='F'))  # direct solution
+        T = spsolve(A, s.reshape(n*n, order="F"))  # direct solution
 
         # Error
-        T_error = T-Texact(Pe, np.reshape(Xc, (1, n**2), order='F'))
+        T_error = T-Texact(Pe, Xc.reshape(n*n, order="F"))
         ERROR[i, j] = np.max(np.abs(T_error))  # infinity norm
 
 ## Compute rates of convergence
@@ -87,5 +87,3 @@ ax.set_yscale('log')
 ax.set_xlabel('N')
 ax.set_ylabel('error')
 ax.grid(True)
-
-fig1.show()

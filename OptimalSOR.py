@@ -90,6 +90,7 @@ np.savetxt('coefficients.txt', P)
 
 ## Plot
 plt.ion()  # turn on interactive mode
+
 fig1 = plt.figure(1)
 fig1.clf()
 ax = fig1.add_subplot(1, 1, 1)
@@ -102,4 +103,3 @@ ax.grid(True)
 ax.set_title('Relaxation factor for SOR iterative method')
 ax.set_xlabel('N')
 ax.set_ylabel('optimal value')
-fig1.show()

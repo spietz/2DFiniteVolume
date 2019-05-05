@@ -1,29 +1,46 @@
 * 2D Finite Volume Method for Transport of Thermal Energy
 ** Intro
-This project provides simple code for solving the stationary transport equation for a scalar quantity in a given fluid flow a uniform grid.
-In the problem cases this scalar quantity is the dimensionless temperature. Therefore the problem only depends upon the Peclét number, Pe which is a ratio betweem convection and diffusion.
-The fluxes used in the finite volume scheme are approximated by finite differences: 
-For the diffusive part of the equation, the central difference scheme, CDS are always applied since diffusion acts in all directions independent of the flow.   
-For the convective part, either CDS or upwind difference scheme, UDS is applied. UDS only used infomation from the upstream direction.
-CDS is second order, whereas UDS only is first-order.
-Combining CDS-CDS results in oscillations and divergence on coarser grids (Pe*dx>2), but generally gives a more accurate solution than CDS-UDS. The CDS-UDS scheme always result in a diagonal-dominant system matrix, which should be the case the numerical method should mimic the physics.
-CDS-UDS should not be used since it reduce the order of the finite volume method.
+This project provides simple code for solving the stationary transport
+equation for a scalar quantity in a given fluid flow on a uniform grid.
+In the problem cases this scalar quantity is the dimensionless
+temperature. Therefore the problem only depends upon the Peclét
+number, Pe which is the ratio betweem convection and diffusion.  The
+fluxes used in the finite volume scheme are approximated by finite
+differences: For the diffusive part of the equation, the central
+difference scheme, CDS are always applied since diffusion acts in all
+directions independent of the flow.  For the convective part, either
+CDS or upwind difference scheme, UDS is applied. UDS only used
+infomation from the upstream direction.  CDS is second order, whereas
+UDS only is first-order.  Combining CDS-CDS results in oscillations
+and divergence on coarser grids (Pe*dx>2), but generally gives a more
+accurate solution than CDS-UDS. The CDS-UDS scheme always result in a
+diagonal-dominant system matrix, which should be the case if the
+numerical method should mimic the physics.  CDS-UDS is first order
+accurate whereas CDS-CDS is second order accurate, which may be
+demonstrated running ConvergenceTo1dUniformFlowSolution.py.
+
 ** Functions
 
 FVConvDiff2D.preprocess.py: Assembles system matrix and source vector.
 
-FVConvDiff2D.postprocess.py: Extrapolates field to domain borders and checks global flux error.
+FVConvDiff2D.postprocess.py: Extrapolates field to domain borders and
+checks global flux error.
 
 ** Drivers
 
-UniformFlow.py: Solves for a uniform cavity flow problem and visualizes the results.
+UniformFlow.py: Solves for a uniform cavity flow problem and
+visualizes the results.
 
-StagnationPointFlow.py: Solves for a stagnation point cavity flow problem and visualizes the results.
+StagnationPointFlow.py: Solves for a stagnation point cavity flow
+problem and visualizes the results.
 
-ConvergenceTo1dUniformFlowSolution.py: Checks the convegence of the different combinations for the uniform flow problem.
+ConvergenceTo1dUniformFlowSolution.py: Checks the convegence of the
+different combinations for the uniform flow problem.
 
-OptimalSOR.py: Find optimal relaxation factors for both problems using various grid sizes and Peclét numbers.
+OptimalSOR.py: Find optimal relaxation factors for both problems using
+various grid sizes and Peclét numbers.
 
 ** Dependencies
 
-SIMPy.py: Basic stationary iterative solvers for sparse matrix systems in python.
+SIMPy.py: Basic stationary iterative solvers for sparse matrix systems
+in python.

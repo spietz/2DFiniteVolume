@@ -50,7 +50,7 @@ fvscheme = 'uds-cds'  # finite volume scheme ('cds-cds' or 'uds-cds')
 A, s = FVConvDiff2D.preprocess(n, L, Pe, problem, fvscheme)
 
 ## Do direct solution
-T = spsolve(A, s.reshape(1, n**2, order='F')).reshape(n,n, order='F')
+T = spsolve(A, s.reshape(n*n, order="F")).reshape(n, n, order='F')
 
 ## Extend T-field to domain walls and get GHC-residual
 TT, GHC, _, _ = FVConvDiff2D.postprocess(
@@ -100,5 +100,3 @@ axarr[1].grid(True)
 axarr[1].set_xlim(0, 1)
 axarr[1].set_ylim(0, 1)
 f.colorbar(p, ax=axarr[1])
-
-f.show()
